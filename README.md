@@ -1,8 +1,11 @@
-# React + Vite
+# Content Savior
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Create as a part of learning react-router-dom
 
-Currently, two official plugins are available:
+## What I've learned
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+`loader` and `useLoaderData` to prepare data for components before rendering
+`action` and `useFetcher` to call action without navigate to different URL
+understand more about form element and its behavior, `<form action=''>` can be used to navigate around
+the `q=` search param in URL
+`useSubmit`, `navigate` and much more!

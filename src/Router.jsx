@@ -41,7 +41,7 @@ export default function Router() {
               action: editAction,
             },
             {
-              path: "contents/:contentsId/destroy",
+              path: "contents/:contentId/destroy",
               action: destroyAction,
               errorElement: <div>Oops! There was an error.</div>,
             },

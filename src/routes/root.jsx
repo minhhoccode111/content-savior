@@ -25,9 +25,78 @@ export const action = async () => {
 function Root() {
   const { contents, q } = useLoaderData();
   const navigation = useNavigation();
+  const submit = useSubmit();
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has("q");
+
+  useEffect(() => {
+    document.getElementById("q").value = q;
+  }, [q]);
   return (
     <>
-      <h1 className="">Hello, World!</h1>
+      <div id="sidebar">
+        <h1>Content Savior</h1>
+        <div>
+          <Form id="search-form" role="search">
+            <input
+              type="search"
+              id="q"
+              className={searching ? "loading" : ""}
+              aria-label="Search Contents"
+              placeholder="Search"
+              name="q"
+              defaultValue={q}
+              onChange={(e) => {
+                const isFirstSearch = q == null;
+                submit(e.currentTarget.form, {
+                  replace: !isFirstSearch,
+                });
+              }}
+            />
+            <div id="search-spinner" aria-hidden hidden={!searching}></div>
+            <div className="sr-only" aria-live="polite"></div>
+          </Form>
+          <Form method="post">
+            <button type="submit">New</button>
+          </Form>
+        </div>
+        <nav>
+          {contents.length ? (
+            <ul>
+              {contents.map((content) => (
+                <li key={content.id}>
+                  <NavLink
+                    className={({ isActive, isPending }) =>
+                      isActive ? "active" : isPending ? "pending" : ""
+                    }
+                    to={`contents/${content.id}`}
+                  >
+                    {content.title ? (
+                      <>{content.title}</>
+                    ) : (
+                      <>
+                        <i>No Name</i>
+                      </>
+                    )}{" "}
+                    {ConstantSourceNode.favorite && <span> ⭐</span>}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>
+              <i>No contents</i>
+            </p>
+          )}
+        </nav>
+      </div>
+      <div
+        className={navigation.state === "loading" ? "loading" : ""}
+        id="detail"
+      >
+        <Outlet />
+      </div>
     </>
   );
 }
