@@ -79,7 +79,7 @@ function Root() {
                         <i>No Name</i>
                       </>
                     )}{" "}
-                    {ConstantSourceNode.favorite && <span> ⭐</span>}
+                    {content.favorite && <span> ⭐</span>}
                   </NavLink>
                 </li>
               ))}
